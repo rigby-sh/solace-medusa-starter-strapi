@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_homepage_hero_banners",
+  "info": {
+    "displayName": "HeroBanner",
+    "icon": ""
+  },
+  "options": {},
+  "attributes": {
+    "Headline": {
+      "type": "string",
+      "required": true
+    },
+    "Text": {
+      "type": "text",
+      "required": false
+    },
+    "CTA": {
+      "displayName": "CTA",
+      "type": "component",
+      "repeatable": false,
+      "component": "homepage.cta"
+    },
+    "Image": {
+      "allowedTypes": [
+        "images",
+        "files"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    }
+  }
+}

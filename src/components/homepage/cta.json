@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_homepage_ctas",
+  "info": {
+    "displayName": "CTA"
+  },
+  "options": {},
+  "attributes": {
+    "BtnText": {
+      "type": "string"
+    },
+    "BtnLink": {
+      "type": "string"
+    }
+  }
+}
