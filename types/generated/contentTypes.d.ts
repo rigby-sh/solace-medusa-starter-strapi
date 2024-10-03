@@ -575,6 +575,38 @@ export interface ApiHomepageHomepage extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiProductVariantColorProductVariantColor
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'product_variants_colors';
+  info: {
+    singularName: 'product-variant-color';
+    pluralName: 'product-variants-colors';
+    displayName: 'ProductVariantsColors';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    Name: Schema.Attribute.String & Schema.Attribute.Required;
+    Type: Schema.Attribute.DynamicZone<
+      ['color-image.color-image', 'color-hex.color-hex']
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::product-variant-color.product-variant-color'
+    >;
+  };
+}
+
 export interface AdminPermission extends Struct.CollectionTypeSchema {
   collectionName: 'admin_permissions';
   info: {
@@ -953,6 +985,7 @@ declare module '@strapi/strapi' {
       'api::blog.blog': ApiBlogBlog;
       'api::collection.collection': ApiCollectionCollection;
       'api::homepage.homepage': ApiHomepageHomepage;
+      'api::product-variant-color.product-variant-color': ApiProductVariantColorProductVariantColor;
       'admin::permission': AdminPermission;
       'admin::user': AdminUser;
       'admin::role': AdminRole;

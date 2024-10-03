@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "product_variants_colors",
+  "info": {
+    "singularName": "product-variant-color",
+    "pluralName": "product-variants-colors",
+    "displayName": "ProductVariantsColors",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string",
+      "required": true
+    },
+    "Type": {
+      "type": "dynamiczone",
+      "components": [
+        "color-image.color-image",
+        "color-hex.color-hex"
+      ]
+    }
+  }
+}

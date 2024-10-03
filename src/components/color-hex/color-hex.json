@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_color_hex_color_hexes",
+  "info": {
+    "displayName": "ColorHex",
+    "icon": "brush"
+  },
+  "options": {},
+  "attributes": {
+    "Color": {
+      "type": "string",
+      "required": false
+    }
+  }
+}

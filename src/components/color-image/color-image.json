@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_color_image_color_images",
+  "info": {
+    "displayName": "ColorImage",
+    "icon": "picture"
+  },
+  "options": {},
+  "attributes": {
+    "Image": {
+      "allowedTypes": [
+        "images",
+        "files"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

@@ -26,11 +26,35 @@ export interface HomepageCta extends Struct.ComponentSchema {
   };
 }
 
+export interface ColorHexColorHex extends Struct.ComponentSchema {
+  collectionName: 'components_color_hex_color_hexes';
+  info: {
+    displayName: 'ColorHex';
+    icon: 'brush';
+  };
+  attributes: {
+    Color: Schema.Attribute.String;
+  };
+}
+
+export interface ColorImageColorImage extends Struct.ComponentSchema {
+  collectionName: 'components_color_image_color_images';
+  info: {
+    displayName: 'ColorImage';
+    icon: 'picture';
+  };
+  attributes: {
+    Image: Schema.Attribute.Media<'images' | 'files'>;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'homepage.hero-banner': HomepageHeroBanner;
       'homepage.cta': HomepageCta;
+      'color-hex.color-hex': ColorHexColorHex;
+      'color-image.color-image': ColorImageColorImage;
     }
   }
 }
