@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "blog_post_categories",
+  "info": {
+    "singularName": "blog-post-category",
+    "pluralName": "blog-post-categories",
+    "displayName": "BlogPostCategories"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    }
+  }
+}

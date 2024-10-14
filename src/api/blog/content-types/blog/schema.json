@@ -4,7 +4,8 @@
   "info": {
     "singularName": "blog",
     "pluralName": "blogs",
-    "displayName": "Blog"
+    "displayName": "Blog",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -24,13 +25,18 @@
       "required": true
     },
     "FeaturedImage": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
       "allowedTypes": [
         "images",
         "files"
-      ],
-      "type": "media",
-      "multiple": false,
-      "required": true
+      ]
+    },
+    "Categories": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::blog-post-category.blog-post-category"
     }
   }
 }

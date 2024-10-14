@@ -526,6 +526,7 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
     singularName: 'blog';
     pluralName: 'blogs';
     displayName: 'Blog';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -536,6 +537,10 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
     Content: Schema.Attribute.RichText & Schema.Attribute.Required;
     FeaturedImage: Schema.Attribute.Media<'images' | 'files'> &
       Schema.Attribute.Required;
+    Categories: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::blog-post-category.blog-post-category'
+    >;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -545,6 +550,34 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::blog.blog'>;
+  };
+}
+
+export interface ApiBlogPostCategoryBlogPostCategory
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'blog_post_categories';
+  info: {
+    singularName: 'blog-post-category';
+    pluralName: 'blog-post-categories';
+    displayName: 'BlogPostCategories';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Title: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::blog-post-category.blog-post-category'
+    >;
   };
 }
 
@@ -1101,6 +1134,7 @@ declare module '@strapi/strapi' {
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::about-us.about-us': ApiAboutUsAboutUs;
       'api::blog.blog': ApiBlogBlog;
+      'api::blog-post-category.blog-post-category': ApiBlogPostCategoryBlogPostCategory;
       'api::collection.collection': ApiCollectionCollection;
       'api::faq.faq': ApiFaqFaq;
       'api::homepage.homepage': ApiHomepageHomepage;
