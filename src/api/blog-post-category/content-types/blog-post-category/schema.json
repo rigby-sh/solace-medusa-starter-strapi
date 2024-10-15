@@ -4,7 +4,8 @@
   "info": {
     "singularName": "blog-post-category",
     "pluralName": "blog-post-categories",
-    "displayName": "BlogPostCategories"
+    "displayName": "BlogPostCategories",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -13,6 +14,10 @@
   "attributes": {
     "Title": {
       "type": "string"
+    },
+    "Slug": {
+      "type": "uid",
+      "targetField": "Title"
     }
   }
 }

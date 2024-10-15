@@ -560,12 +560,14 @@ export interface ApiBlogPostCategoryBlogPostCategory
     singularName: 'blog-post-category';
     pluralName: 'blog-post-categories';
     displayName: 'BlogPostCategories';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
     Title: Schema.Attribute.String;
+    Slug: Schema.Attribute.UID<'Title'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
