@@ -1,4 +1,4 @@
 # nixpacks.toml
 
 [phases.start]
-cmd = "npm run develop"
+cmd = "strapi develop"
