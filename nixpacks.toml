@@ -1,0 +1,4 @@
+# nixpacks.toml
+
+[phases.start]
+cmd = "npm run develop"
