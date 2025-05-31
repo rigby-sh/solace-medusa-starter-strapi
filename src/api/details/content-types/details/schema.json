@@ -1,0 +1,21 @@
+{
+  "kind": "singleType",
+  "collectionName": "detailss",
+  "info": {
+    "singularName": "details",
+    "pluralName": "detailss",
+    "displayName": "details"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "Content": {
+      "type": "richtext"
+    }
+  }
+}
