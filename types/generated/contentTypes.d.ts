@@ -497,14 +497,19 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    Title: Schema.Attribute.String & Schema.Attribute.Required;
-    Slug: Schema.Attribute.UID<'Title'>;
-    Content: Schema.Attribute.RichText & Schema.Attribute.Required;
-    FeaturedImage: Schema.Attribute.Media<'images' | 'files'> &
-      Schema.Attribute.Required;
-    Categories: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::blog-post-category.blog-post-category'
+    Title: Schema.Attribute.String;
+    Description: Schema.Attribute.Text;
+    FeauturedImage: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    HeaderImages: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    Content: Schema.Attribute.Text;
+    Date: Schema.Attribute.Date;
+    DynamycContent: Schema.Attribute.DynamicZone<
+      ['blog-content.slider', 'blog-content.one-image']
     >;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;

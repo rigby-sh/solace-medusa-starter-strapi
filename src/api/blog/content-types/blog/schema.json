@@ -13,30 +13,45 @@
   "pluginOptions": {},
   "attributes": {
     "Title": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
-    "Slug": {
-      "type": "uid",
-      "targetField": "Title"
+    "Description": {
+      "type": "text"
     },
-    "Content": {
-      "type": "richtext",
-      "required": true
-    },
-    "FeaturedImage": {
+    "FeauturedImage": {
       "type": "media",
       "multiple": false,
-      "required": true,
+      "required": false,
       "allowedTypes": [
         "images",
-        "files"
+        "files",
+        "videos",
+        "audios"
       ]
     },
-    "Categories": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::blog-post-category.blog-post-category"
+    "HeaderImages": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "Content": {
+      "type": "text"
+    },
+    "Date": {
+      "type": "date"
+    },
+    "DynamycContent": {
+      "type": "dynamiczone",
+      "components": [
+        "blog-content.slider",
+        "blog-content.one-image"
+      ]
     }
   }
 }

@@ -73,6 +73,33 @@ export interface ColorHexColorHex extends Struct.ComponentSchema {
   };
 }
 
+export interface BlogContentSlider extends Struct.ComponentSchema {
+  collectionName: 'components_blog_content_sliders';
+  info: {
+    displayName: 'Slider';
+  };
+  attributes: {
+    Title: Schema.Attribute.String;
+    Content: Schema.Attribute.RichText;
+    Slider: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+  };
+}
+
+export interface BlogContentOneImage extends Struct.ComponentSchema {
+  collectionName: 'components_blog_content_one_images';
+  info: {
+    displayName: 'OneImage';
+  };
+  attributes: {
+    Title: Schema.Attribute.String;
+    Image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    Content: Schema.Attribute.RichText;
+  };
+}
+
 export interface AboutUsWhyUs extends Struct.ComponentSchema {
   collectionName: 'components_about_us_whyuses';
   info: {
@@ -131,6 +158,8 @@ declare module '@strapi/strapi' {
       'faq.faq-question': FaqFaqQuestion;
       'color-image.color-image': ColorImageColorImage;
       'color-hex.color-hex': ColorHexColorHex;
+      'blog-content.slider': BlogContentSlider;
+      'blog-content.one-image': BlogContentOneImage;
       'about-us.why-us': AboutUsWhyUs;
       'about-us.tile': AboutUsTile;
       'about-us.numerical-content': AboutUsNumericalContent;

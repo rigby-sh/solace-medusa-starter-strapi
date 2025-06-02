@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_blog_content_one_images",
+  "info": {
+    "displayName": "OneImage"
+  },
+  "options": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "Image": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "Content": {
+      "type": "richtext"
+    }
+  }
+}
