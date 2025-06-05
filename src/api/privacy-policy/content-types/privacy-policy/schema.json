@@ -12,9 +12,14 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "PageContent": {
-      "type": "richtext",
-      "required": false
+    "Title": {
+      "type": "string"
+    },
+    "SubTitle": {
+      "type": "richtext"
+    },
+    "Content": {
+      "type": "richtext"
     }
   }
 }

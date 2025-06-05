@@ -593,6 +593,7 @@ export interface ApiDeliveryAndPaymentDeliveryAndPayment
     singularName: 'delivery-and-payment';
     pluralName: 'delivery-and-payments';
     displayName: 'delivery-and-payment';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -600,6 +601,7 @@ export interface ApiDeliveryAndPaymentDeliveryAndPayment
   attributes: {
     Title: Schema.Attribute.String;
     Content: Schema.Attribute.RichText;
+    SubTitle: Schema.Attribute.RichText;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -655,7 +657,9 @@ export interface ApiPrivacyPolicyPrivacyPolicy extends Struct.SingleTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    PageContent: Schema.Attribute.RichText;
+    Title: Schema.Attribute.String;
+    SubTitle: Schema.Attribute.RichText;
+    Content: Schema.Attribute.RichText;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;

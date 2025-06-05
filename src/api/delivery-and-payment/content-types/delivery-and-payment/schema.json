@@ -4,7 +4,8 @@
   "info": {
     "singularName": "delivery-and-payment",
     "pluralName": "delivery-and-payments",
-    "displayName": "delivery-and-payment"
+    "displayName": "delivery-and-payment",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -15,6 +16,9 @@
       "type": "string"
     },
     "Content": {
+      "type": "richtext"
+    },
+    "SubTitle": {
       "type": "richtext"
     }
   }
