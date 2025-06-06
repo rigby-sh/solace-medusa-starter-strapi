@@ -52,6 +52,10 @@
         "blog-content.slider",
         "blog-content.one-image"
       ]
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "Title"
     }
   }
 }

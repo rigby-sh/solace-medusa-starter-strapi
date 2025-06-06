@@ -511,6 +511,7 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
     DynamycContent: Schema.Attribute.DynamicZone<
       ['blog-content.slider', 'blog-content.one-image']
     >;
+    slug: Schema.Attribute.UID<'Title'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -617,34 +618,6 @@ export interface ApiDeliveryAndPaymentDeliveryAndPayment
   };
 }
 
-export interface ApiDetailsDetails extends Struct.SingleTypeSchema {
-  collectionName: 'detailss';
-  info: {
-    singularName: 'details';
-    pluralName: 'detailss';
-    displayName: 'details';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Title: Schema.Attribute.String;
-    Content: Schema.Attribute.RichText;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::details.details'
-    >;
-  };
-}
-
 export interface ApiPrivacyPolicyPrivacyPolicy extends Struct.SingleTypeSchema {
   collectionName: 'privacy_policies';
   info: {
@@ -731,6 +704,34 @@ export interface ApiPublicOfferPublicOffer extends Struct.SingleTypeSchema {
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::public-offer.public-offer'
+    >;
+  };
+}
+
+export interface ApiRequisitesRequisites extends Struct.SingleTypeSchema {
+  collectionName: 'requisitess';
+  info: {
+    singularName: 'requisites';
+    pluralName: 'requisitess';
+    displayName: 'requisites';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Title: Schema.Attribute.String;
+    Content: Schema.Attribute.RichText;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::requisites.requisites'
     >;
   };
 }
@@ -1199,10 +1200,10 @@ declare module '@strapi/strapi' {
       'api::blog-post-category.blog-post-category': ApiBlogPostCategoryBlogPostCategory;
       'api::collection.collection': ApiCollectionCollection;
       'api::delivery-and-payment.delivery-and-payment': ApiDeliveryAndPaymentDeliveryAndPayment;
-      'api::details.details': ApiDetailsDetails;
       'api::privacy-policy.privacy-policy': ApiPrivacyPolicyPrivacyPolicy;
       'api::product-variant-color.product-variant-color': ApiProductVariantColorProductVariantColor;
       'api::public-offer.public-offer': ApiPublicOfferPublicOffer;
+      'api::requisites.requisites': ApiRequisitesRequisites;
       'api::return-product.return-product': ApiReturnProductReturnProduct;
       'api::user-agreement.user-agreement': ApiUserAgreementUserAgreement;
       'api::warranty-conditions.warranty-conditions': ApiWarrantyConditionsWarrantyConditions;

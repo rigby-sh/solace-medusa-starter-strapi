@@ -1,10 +1,10 @@
 {
   "kind": "singleType",
-  "collectionName": "detailss",
+  "collectionName": "requisitess",
   "info": {
-    "singularName": "details",
-    "pluralName": "detailss",
-    "displayName": "details"
+    "singularName": "requisites",
+    "pluralName": "requisitess",
+    "displayName": "requisites"
   },
   "options": {
     "draftAndPublish": true
