@@ -4,18 +4,27 @@
   "info": {
     "singularName": "tag",
     "pluralName": "tags",
-    "displayName": "Tag",
-    "description": "Tags for blog posts"
+    "displayName": "Тег",
+    "description": "Теги для статей блога"
   },
   "options": {
     "draftAndPublish": true
   },
-  "pluginOptions": {},
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
   "attributes": {
     "Name": {
       "type": "string",
       "required": true,
-      "unique": true
+      "unique": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "Slug": {
       "type": "uid",

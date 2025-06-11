@@ -4,29 +4,40 @@
   "info": {
     "singularName": "blog",
     "pluralName": "blogs",
-    "displayName": "Blog",
+    "displayName": "Статья блога",
     "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
-  "pluginOptions": {},
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
   "attributes": {
     "Title": {
-      "type": "string"
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "Description": {
-      "type": "text"
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "FeaturedImage": {
       "type": "media",
       "multiple": false,
       "required": false,
       "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
+        "images"
       ]
     },
     "HeaderImages": {
@@ -34,14 +45,8 @@
       "multiple": true,
       "required": false,
       "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
+        "images"
       ]
-    },
-    "Content": {
-      "type": "text"
     },
     "Date": {
       "type": "date"
@@ -54,12 +59,23 @@
         "blog-content.image-gallery-block",
         "blog-content.quote-block",
         "blog-content.code-snippet",
-        "blog-content.video-embed-block"
-      ]
+        "blog-content.video-embed-block",
+        "blog-content.heading-block"
+      ],
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "slug": {
       "type": "uid",
-      "targetField": "Title"
+      "targetField": "Title",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "categories": {
       "type": "relation",

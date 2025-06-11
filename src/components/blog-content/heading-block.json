@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_blog_content_heading_blocks",
+  "info": {
+    "displayName": "Блок заголовка",
+    "icon": "heading",
+    "description": "Простой текстовый заголовок."
+  },
+  "options": {},
+  "attributes": {
+    "heading_text": {
+      "type": "string",
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    }
+  }
+}

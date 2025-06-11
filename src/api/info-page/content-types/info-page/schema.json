@@ -4,24 +4,43 @@
   "info": {
     "singularName": "info-page",
     "pluralName": "info-pages",
-    "displayName": "Info Page",
-    "description": "Informational pages like delivery, privacy policy, etc."
+    "displayName": "Информационная страница",
+    "description": "Информационные страницы, такие как доставка, политика конфиденциальности и т.д."
   },
   "options": {
     "draftAndPublish": true
   },
-  "pluginOptions": {},
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
   "attributes": {
     "title": {
       "type": "string",
-      "required": true
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "subTitle": {
-      "type": "richtext"
+      "type": "richtext",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "content": {
       "type": "richtext",
-      "required": true
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "slug": {
       "type": "uid",
