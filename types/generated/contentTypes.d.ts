@@ -509,9 +509,21 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
     Content: Schema.Attribute.Text;
     Date: Schema.Attribute.Date;
     DynamicContent: Schema.Attribute.DynamicZone<
-      ['blog-content.slider', 'blog-content.one-image']
+      [
+        'blog-content.text-paragraph',
+        'blog-content.single-image-block',
+        'blog-content.image-gallery-block',
+        'blog-content.quote-block',
+        'blog-content.code-snippet',
+        'blog-content.video-embed-block',
+      ]
     >;
     slug: Schema.Attribute.UID<'Title'>;
+    categories: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::blog-post-category.blog-post-category'
+    >;
+    tags: Schema.Attribute.Relation<'manyToMany', 'api::tag.tag'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -539,6 +551,7 @@ export interface ApiBlogPostCategoryBlogPostCategory
   attributes: {
     Title: Schema.Attribute.String;
     Slug: Schema.Attribute.UID<'Title'>;
+    blogs: Schema.Attribute.Relation<'manyToMany', 'api::blog.blog'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -550,70 +563,6 @@ export interface ApiBlogPostCategoryBlogPostCategory
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::blog-post-category.blog-post-category'
-    >;
-  };
-}
-
-export interface ApiCollectionCollection extends Struct.CollectionTypeSchema {
-  collectionName: 'collections';
-  info: {
-    singularName: 'collection';
-    pluralName: 'collections';
-    displayName: 'Collections';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Title: Schema.Attribute.String & Schema.Attribute.Required;
-    Handle: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique;
-    Image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
-    Description: Schema.Attribute.Text & Schema.Attribute.Required;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::collection.collection'
-    >;
-  };
-}
-
-export interface ApiDeliveryAndPaymentDeliveryAndPayment
-  extends Struct.SingleTypeSchema {
-  collectionName: 'delivery_and_payments';
-  info: {
-    singularName: 'delivery-and-payment';
-    pluralName: 'delivery-and-payments';
-    displayName: 'delivery-and-payment';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Title: Schema.Attribute.String;
-    Content: Schema.Attribute.RichText;
-    SubTitle: Schema.Attribute.RichText;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::delivery-and-payment.delivery-and-payment'
     >;
   };
 }
@@ -649,21 +598,23 @@ export interface ApiInfoPageInfoPage extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiPrivacyPolicyPrivacyPolicy extends Struct.SingleTypeSchema {
-  collectionName: 'privacy_policies';
+export interface ApiTagTag extends Struct.CollectionTypeSchema {
+  collectionName: 'tags';
   info: {
-    singularName: 'privacy-policy';
-    pluralName: 'privacy-policies';
-    displayName: 'Privacy Policy';
-    description: '';
+    singularName: 'tag';
+    pluralName: 'tags';
+    displayName: 'Tag';
+    description: 'Tags for blog posts';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    Title: Schema.Attribute.String;
-    SubTitle: Schema.Attribute.RichText;
-    Content: Schema.Attribute.RichText;
+    Name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    Slug: Schema.Attribute.UID<'Name'> & Schema.Attribute.Required;
+    blogs: Schema.Attribute.Relation<'manyToMany', 'api::blog.blog'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -672,183 +623,7 @@ export interface ApiPrivacyPolicyPrivacyPolicy extends Struct.SingleTypeSchema {
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::privacy-policy.privacy-policy'
-    >;
-  };
-}
-
-export interface ApiProductVariantColorProductVariantColor
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'product_variants_colors';
-  info: {
-    singularName: 'product-variant-color';
-    pluralName: 'product-variants-colors';
-    displayName: 'ProductVariantsColors';
-    description: '';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    Name: Schema.Attribute.String & Schema.Attribute.Required;
-    Type: Schema.Attribute.DynamicZone<
-      ['color-image.color-image', 'color-hex.color-hex']
-    >;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::product-variant-color.product-variant-color'
-    >;
-  };
-}
-
-export interface ApiPublicOfferPublicOffer extends Struct.SingleTypeSchema {
-  collectionName: 'public_offers';
-  info: {
-    singularName: 'public-offer';
-    pluralName: 'public-offers';
-    displayName: 'public-offer';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Title: Schema.Attribute.String;
-    Content: Schema.Attribute.RichText;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::public-offer.public-offer'
-    >;
-  };
-}
-
-export interface ApiRequisitesRequisites extends Struct.SingleTypeSchema {
-  collectionName: 'requisitess';
-  info: {
-    singularName: 'requisites';
-    pluralName: 'requisitess';
-    displayName: 'requisites';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Title: Schema.Attribute.String;
-    Content: Schema.Attribute.RichText;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::requisites.requisites'
-    >;
-  };
-}
-
-export interface ApiReturnProductReturnProduct extends Struct.SingleTypeSchema {
-  collectionName: 'return_products';
-  info: {
-    singularName: 'return-product';
-    pluralName: 'return-products';
-    displayName: 'return-product';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Title: Schema.Attribute.String;
-    Content: Schema.Attribute.RichText;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::return-product.return-product'
-    >;
-  };
-}
-
-export interface ApiUserAgreementUserAgreement extends Struct.SingleTypeSchema {
-  collectionName: 'user_agreements';
-  info: {
-    singularName: 'user-agreement';
-    pluralName: 'user-agreements';
-    displayName: 'user-agreement';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Title: Schema.Attribute.String;
-    Content: Schema.Attribute.RichText;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::user-agreement.user-agreement'
-    >;
-  };
-}
-
-export interface ApiWarrantyConditionsWarrantyConditions
-  extends Struct.SingleTypeSchema {
-  collectionName: 'warranty_conditionss';
-  info: {
-    singularName: 'warranty-conditions';
-    pluralName: 'warranty-conditionss';
-    displayName: 'warranty-conditions';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Title: Schema.Attribute.String;
-    Content: Schema.Attribute.RichText;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::warranty-conditions.warranty-conditions'
-    >;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::tag.tag'>;
   };
 }
 
@@ -1229,16 +1004,8 @@ declare module '@strapi/strapi' {
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::blog.blog': ApiBlogBlog;
       'api::blog-post-category.blog-post-category': ApiBlogPostCategoryBlogPostCategory;
-      'api::collection.collection': ApiCollectionCollection;
-      'api::delivery-and-payment.delivery-and-payment': ApiDeliveryAndPaymentDeliveryAndPayment;
       'api::info-page.info-page': ApiInfoPageInfoPage;
-      'api::privacy-policy.privacy-policy': ApiPrivacyPolicyPrivacyPolicy;
-      'api::product-variant-color.product-variant-color': ApiProductVariantColorProductVariantColor;
-      'api::public-offer.public-offer': ApiPublicOfferPublicOffer;
-      'api::requisites.requisites': ApiRequisitesRequisites;
-      'api::return-product.return-product': ApiReturnProductReturnProduct;
-      'api::user-agreement.user-agreement': ApiUserAgreementUserAgreement;
-      'api::warranty-conditions.warranty-conditions': ApiWarrantyConditionsWarrantyConditions;
+      'api::tag.tag': ApiTagTag;
       'admin::permission': AdminPermission;
       'admin::user': AdminUser;
       'admin::role': AdminRole;

@@ -23,7 +23,7 @@
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::blog.blog",
-      "inversedBy": "categories"
+      "mappedBy": "categories"
     }
   }
 }
