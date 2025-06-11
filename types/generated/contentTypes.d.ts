@@ -490,23 +490,32 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
   info: {
     singularName: 'blog';
     pluralName: 'blogs';
-    displayName: 'Blog';
+    displayName: '\u0421\u0442\u0430\u0442\u044C\u044F \u0431\u043B\u043E\u0433\u0430';
     description: '';
   };
   options: {
     draftAndPublish: true;
   };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
   attributes: {
-    Title: Schema.Attribute.String;
-    Description: Schema.Attribute.Text;
-    FeaturedImage: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios'
-    >;
-    HeaderImages: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios',
-      true
-    >;
-    Content: Schema.Attribute.Text;
+    Title: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    Description: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    FeaturedImage: Schema.Attribute.Media<'images'>;
+    HeaderImages: Schema.Attribute.Media<'images', true>;
     Date: Schema.Attribute.Date;
     DynamicContent: Schema.Attribute.DynamicZone<
       [
@@ -516,9 +525,20 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
         'blog-content.quote-block',
         'blog-content.code-snippet',
         'blog-content.video-embed-block',
+        'blog-content.heading-block',
       ]
-    >;
-    slug: Schema.Attribute.UID<'Title'>;
+    > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    slug: Schema.Attribute.UID<'Title'> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     categories: Schema.Attribute.Relation<
       'manyToMany',
       'api::blog-post-category.blog-post-category'
@@ -542,14 +562,24 @@ export interface ApiBlogPostCategoryBlogPostCategory
   info: {
     singularName: 'blog-post-category';
     pluralName: 'blog-post-categories';
-    displayName: 'BlogPostCategories';
+    displayName: '\u041A\u0430\u0442\u0435\u0433\u043E\u0440\u0438\u044F \u0431\u043B\u043E\u0433\u0430';
     description: '';
   };
   options: {
     draftAndPublish: true;
   };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
   attributes: {
-    Title: Schema.Attribute.String;
+    Title: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     Slug: Schema.Attribute.UID<'Title'>;
     blogs: Schema.Attribute.Relation<'manyToMany', 'api::blog.blog'>;
     createdAt: Schema.Attribute.DateTime;
@@ -572,16 +602,38 @@ export interface ApiInfoPageInfoPage extends Struct.CollectionTypeSchema {
   info: {
     singularName: 'info-page';
     pluralName: 'info-pages';
-    displayName: 'Info Page';
-    description: 'Informational pages like delivery, privacy policy, etc.';
+    displayName: '\u0418\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u043E\u043D\u043D\u0430\u044F \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0430';
+    description: '\u0418\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u043E\u043D\u043D\u044B\u0435 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u044B, \u0442\u0430\u043A\u0438\u0435 \u043A\u0430\u043A \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0430, \u043F\u043E\u043B\u0438\u0442\u0438\u043A\u0430 \u043A\u043E\u043D\u0444\u0438\u0434\u0435\u043D\u0446\u0438\u0430\u043B\u044C\u043D\u043E\u0441\u0442\u0438 \u0438 \u0442.\u0434.';
   };
   options: {
     draftAndPublish: true;
   };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
   attributes: {
-    title: Schema.Attribute.String & Schema.Attribute.Required;
-    subTitle: Schema.Attribute.RichText;
-    content: Schema.Attribute.RichText & Schema.Attribute.Required;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    subTitle: Schema.Attribute.RichText &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    content: Schema.Attribute.RichText &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
@@ -603,16 +655,26 @@ export interface ApiTagTag extends Struct.CollectionTypeSchema {
   info: {
     singularName: 'tag';
     pluralName: 'tags';
-    displayName: 'Tag';
-    description: 'Tags for blog posts';
+    displayName: '\u0422\u0435\u0433';
+    description: '\u0422\u0435\u0433\u0438 \u0434\u043B\u044F \u0441\u0442\u0430\u0442\u0435\u0439 \u0431\u043B\u043E\u0433\u0430';
   };
   options: {
     draftAndPublish: true;
   };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
   attributes: {
     Name: Schema.Attribute.String &
       Schema.Attribute.Required &
-      Schema.Attribute.Unique;
+      Schema.Attribute.Unique &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     Slug: Schema.Attribute.UID<'Name'> & Schema.Attribute.Required;
     blogs: Schema.Attribute.Relation<'manyToMany', 'api::blog.blog'>;
     createdAt: Schema.Attribute.DateTime;

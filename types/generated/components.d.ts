@@ -65,6 +65,24 @@ export interface BlogContentImageGalleryBlock extends Struct.ComponentSchema {
   };
 }
 
+export interface BlogContentHeadingBlock extends Struct.ComponentSchema {
+  collectionName: 'components_blog_content_heading_blocks';
+  info: {
+    displayName: '\u0411\u043B\u043E\u043A \u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043A\u0430';
+    icon: 'heading';
+    description: '\u041F\u0440\u043E\u0441\u0442\u043E\u0439 \u0442\u0435\u043A\u0441\u0442\u043E\u0432\u044B\u0439 \u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043E\u043A.';
+  };
+  attributes: {
+    heading_text: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+  };
+}
+
 export interface BlogContentCodeSnippet extends Struct.ComponentSchema {
   collectionName: 'components_blog_content_code_snippets';
   info: {
@@ -86,6 +104,7 @@ declare module '@strapi/strapi' {
       'blog-content.single-image-block': BlogContentSingleImageBlock;
       'blog-content.quote-block': BlogContentQuoteBlock;
       'blog-content.image-gallery-block': BlogContentImageGalleryBlock;
+      'blog-content.heading-block': BlogContentHeadingBlock;
       'blog-content.code-snippet': BlogContentCodeSnippet;
     }
   }
