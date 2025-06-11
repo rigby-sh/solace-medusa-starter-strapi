@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_blog_content_text_paragraphs",
+  "info": {
+    "displayName": "Text Paragraph",
+    "icon": "align-left",
+    "description": "A simple paragraph of text with rich text capabilities."
+  },
+  "options": {},
+  "attributes": {
+    "content": {
+      "type": "richtext",
+      "required": true
+    }
+  }
+}

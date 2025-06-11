@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_blog_content_quote_blocks",
+  "info": {
+    "displayName": "Quote Block",
+    "icon": "quote-left",
+    "description": "A block for displaying a quote."
+  },
+  "options": {},
+  "attributes": {
+    "quoteText": {
+      "type": "text",
+      "required": true
+    },
+    "author": {
+      "type": "string"
+    }
+  }
+}

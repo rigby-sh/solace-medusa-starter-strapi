@@ -49,13 +49,29 @@
     "DynamicContent": {
       "type": "dynamiczone",
       "components": [
-        "blog-content.slider",
-        "blog-content.one-image"
+        "blog-content.text-paragraph",
+        "blog-content.single-image-block",
+        "blog-content.image-gallery-block",
+        "blog-content.quote-block",
+        "blog-content.code-snippet",
+        "blog-content.video-embed-block"
       ]
     },
     "slug": {
       "type": "uid",
       "targetField": "Title"
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::blog-post-category.blog-post-category",
+      "inversedBy": "blogs"
+    },
+    "tags": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tag.tag",
+      "inversedBy": "blogs"
     }
   }
 }

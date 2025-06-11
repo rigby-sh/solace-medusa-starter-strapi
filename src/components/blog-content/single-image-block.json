@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_blog_content_single_image_blocks",
+  "info": {
+    "displayName": "Single Image Block",
+    "icon": "image",
+    "description": "A block for a single image with optional caption and alt text."
+  },
+  "options": {},
+  "attributes": {
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["images"]
+    },
+    "caption": {
+      "type": "string"
+    },
+    "altText": {
+      "type": "string"
+    }
+  }
+}
