@@ -51,17 +51,6 @@ export interface FaqFaqQuestion extends Struct.ComponentSchema {
   };
 }
 
-export interface ColorImageColorImage extends Struct.ComponentSchema {
-  collectionName: 'components_color_image_color_images';
-  info: {
-    displayName: 'ColorImage';
-    icon: 'picture';
-  };
-  attributes: {
-    Image: Schema.Attribute.Media<'images' | 'files'>;
-  };
-}
-
 export interface ColorHexColorHex extends Struct.ComponentSchema {
   collectionName: 'components_color_hex_color_hexes';
   info: {
@@ -73,30 +62,14 @@ export interface ColorHexColorHex extends Struct.ComponentSchema {
   };
 }
 
-export interface BlogContentSlider extends Struct.ComponentSchema {
-  collectionName: 'components_blog_content_sliders';
+export interface ColorImageColorImage extends Struct.ComponentSchema {
+  collectionName: 'components_color_image_color_images';
   info: {
-    displayName: 'Slider';
+    displayName: 'ColorImage';
+    icon: 'picture';
   };
   attributes: {
-    Title: Schema.Attribute.String;
-    Content: Schema.Attribute.RichText;
-    Slider: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios',
-      true
-    >;
-  };
-}
-
-export interface BlogContentOneImage extends Struct.ComponentSchema {
-  collectionName: 'components_blog_content_one_images';
-  info: {
-    displayName: 'OneImage';
-  };
-  attributes: {
-    Title: Schema.Attribute.String;
-    Image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    Content: Schema.Attribute.RichText;
+    Image: Schema.Attribute.Media<'images' | 'files'>;
   };
 }
 
@@ -149,6 +122,33 @@ export interface AboutUsContentSection extends Struct.ComponentSchema {
   };
 }
 
+export interface BlogContentSlider extends Struct.ComponentSchema {
+  collectionName: 'components_blog_content_sliders';
+  info: {
+    displayName: 'Slider';
+  };
+  attributes: {
+    Title: Schema.Attribute.String;
+    Content: Schema.Attribute.RichText;
+    Slider: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+  };
+}
+
+export interface BlogContentOneImage extends Struct.ComponentSchema {
+  collectionName: 'components_blog_content_one_images';
+  info: {
+    displayName: 'OneImage';
+  };
+  attributes: {
+    Title: Schema.Attribute.String;
+    Image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    Content: Schema.Attribute.RichText;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
@@ -156,14 +156,14 @@ declare module '@strapi/strapi' {
       'homepage.cta': HomepageCta;
       'faq.faq': FaqFaq;
       'faq.faq-question': FaqFaqQuestion;
-      'color-image.color-image': ColorImageColorImage;
       'color-hex.color-hex': ColorHexColorHex;
-      'blog-content.slider': BlogContentSlider;
-      'blog-content.one-image': BlogContentOneImage;
+      'color-image.color-image': ColorImageColorImage;
       'about-us.why-us': AboutUsWhyUs;
       'about-us.tile': AboutUsTile;
       'about-us.numerical-content': AboutUsNumericalContent;
       'about-us.content-section': AboutUsContentSection;
+      'blog-content.slider': BlogContentSlider;
+      'blog-content.one-image': BlogContentOneImage;
     }
   }
 }

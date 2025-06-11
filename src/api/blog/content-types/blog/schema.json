@@ -18,7 +18,7 @@
     "Description": {
       "type": "text"
     },
-    "FeauturedImage": {
+    "FeaturedImage": {
       "type": "media",
       "multiple": false,
       "required": false,
@@ -46,7 +46,7 @@
     "Date": {
       "type": "date"
     },
-    "DynamycContent": {
+    "DynamicContent": {
       "type": "dynamiczone",
       "components": [
         "blog-content.slider",

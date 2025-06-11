@@ -499,7 +499,7 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
   attributes: {
     Title: Schema.Attribute.String;
     Description: Schema.Attribute.Text;
-    FeauturedImage: Schema.Attribute.Media<
+    FeaturedImage: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios'
     >;
     HeaderImages: Schema.Attribute.Media<
@@ -508,7 +508,7 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
     >;
     Content: Schema.Attribute.Text;
     Date: Schema.Attribute.Date;
-    DynamycContent: Schema.Attribute.DynamicZone<
+    DynamicContent: Schema.Attribute.DynamicZone<
       ['blog-content.slider', 'blog-content.one-image']
     >;
     slug: Schema.Attribute.UID<'Title'>;
@@ -614,6 +614,37 @@ export interface ApiDeliveryAndPaymentDeliveryAndPayment
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::delivery-and-payment.delivery-and-payment'
+    >;
+  };
+}
+
+export interface ApiInfoPageInfoPage extends Struct.CollectionTypeSchema {
+  collectionName: 'info_pages';
+  info: {
+    singularName: 'info-page';
+    pluralName: 'info-pages';
+    displayName: 'Info Page';
+    description: 'Informational pages like delivery, privacy policy, etc.';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    subTitle: Schema.Attribute.RichText;
+    content: Schema.Attribute.RichText & Schema.Attribute.Required;
+    slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::info-page.info-page'
     >;
   };
 }
@@ -775,7 +806,7 @@ export interface ApiUserAgreementUserAgreement extends Struct.SingleTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    TItle: Schema.Attribute.String;
+    Title: Schema.Attribute.String;
     Content: Schema.Attribute.RichText;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
@@ -1200,6 +1231,7 @@ declare module '@strapi/strapi' {
       'api::blog-post-category.blog-post-category': ApiBlogPostCategoryBlogPostCategory;
       'api::collection.collection': ApiCollectionCollection;
       'api::delivery-and-payment.delivery-and-payment': ApiDeliveryAndPaymentDeliveryAndPayment;
+      'api::info-page.info-page': ApiInfoPageInfoPage;
       'api::privacy-policy.privacy-policy': ApiPrivacyPolicyPrivacyPolicy;
       'api::product-variant-color.product-variant-color': ApiProductVariantColorProductVariantColor;
       'api::public-offer.public-offer': ApiPublicOfferPublicOffer;

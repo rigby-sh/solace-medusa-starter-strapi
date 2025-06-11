@@ -11,7 +11,7 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "TItle": {
+    "Title": {
       "type": "string"
     },
     "Content": {
