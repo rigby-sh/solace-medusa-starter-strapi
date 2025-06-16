@@ -3,7 +3,7 @@ export default ({ env }) => ({
   port: env.int('PORT', 1337),
   // Добавляем публичный URL сервера Strapi
   // Он будет использоваться для генерации абсолютных URL для медиафайлов
-   url: env('PUBLIC_URL', 'https://strapi.bertazzoni.phlora.ru'),
+  url: env('PUBLIC_URL', 'https://strapi.bertazzoni.phlora.ru'),
   app: {
     keys: env.array('APP_KEYS'),
   },

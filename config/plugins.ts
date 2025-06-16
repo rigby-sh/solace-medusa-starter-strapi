@@ -1,13 +1,18 @@
 export default ({ env }) => ({
   upload: {
     config: {
-      provider: "aws-s3", // Изменяем провайдера на aws-s3
+      provider: "aws-s3",
       providerOptions: {
         s3Options: {
-          accessKeyId: env("AWS_ACCESS_KEY_ID"),
-          secretAccessKey: env("AWS_ACCESS_SECRET_KEY"),
+          // Оборачиваем ключи в объект credentials
+          credentials: {
+            accessKeyId: env("AWS_ACCESS_KEY_ID"),
+            secretAccessKey: env("AWS_ACCESS_SECRET_KEY"),
+          },
           region: env("AWS_REGION"),
-          endpoint: env("AWS_ENDPOINT"), // Обязательно для Timeweb Cloud
+          endpoint: env("AWS_ENDPOINT"), // Обязательно для S3-совместимых хранилищ
+          // Для многих S3-совместимых хранилищ также может понадобиться этот параметр:
+          forcePathStyle: true, 
           params: {
             Bucket: env("AWS_BUCKET"),
           },
