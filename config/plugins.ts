@@ -19,7 +19,9 @@ export default ({ env }) => ({
         },
       },
       actionOptions: {
-        upload: {},
+        upload: {
+          Key: `uploads/StrapiBertazzoni/${File.name}`, 
+        },
         uploadStream: {},
         delete: {},
       },
