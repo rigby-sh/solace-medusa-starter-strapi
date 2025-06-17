@@ -7,13 +7,15 @@
   },
   "options": {},
   "attributes": {
-    "embedUrl": {
-      "type": "string",
-      "description": "URL of the video (e.g., YouTube, Vimeo)"
-    },
-    "embedCode": {
-      "type": "text",
-      "description": "HTML embed code for the video"
+    "Video": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }

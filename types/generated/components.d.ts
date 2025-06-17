@@ -8,8 +8,7 @@ export interface BlogContentVideoEmbedBlock extends Struct.ComponentSchema {
     description: 'A block for embedding videos from URLs or with embed code.';
   };
   attributes: {
-    embedUrl: Schema.Attribute.String;
-    embedCode: Schema.Attribute.Text;
+    Video: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
   };
 }
 

@@ -515,7 +515,7 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
         };
       }>;
     FeaturedImage: Schema.Attribute.Media<'images'>;
-    HeaderImages: Schema.Attribute.Media<'images', true>;
+    HeaderImages: Schema.Attribute.Media<'images' | 'videos', true>;
     Date: Schema.Attribute.Date;
     DynamicContent: Schema.Attribute.DynamicZone<
       [
