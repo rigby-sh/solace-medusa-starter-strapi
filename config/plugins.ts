@@ -1,24 +1,30 @@
-export default ({ env }) => ({
-  upload: {
-    config: {
-      provider: "aws-s3",
-      providerOptions: {
-        rootPath: env("DO_SPACE_PATH"),
-        credentials: {
-          accessKeyId: env("DO_SPACE_ACCESS_KEY"),
-          secretAccessKey: env("DO_SPACE_SECRET_KEY"),
+export default ({ env }) => {
+  console.log('AWS_ACCESS_KEY_ID:', env('AWS_ACCESS_KEY_ID'));
+  console.log('AWS_ACCESS_SECRET_KEY:', env('AWS_ACCESS_SECRET_KEY') ? '***' : 'not set');
+  return {
+    upload: {
+      config: {
+        provider: "aws-s3",
+        providerOptions: {
+          s3Options: {
+            credentials: {
+              accessKeyId: env("AWS_ACCESS_KEY_ID"),
+              secretAccessKey: env("AWS_ACCESS_SECRET_KEY"),
+            },
+            region: env("AWS_REGION"),
+            endpoint: env("AWS_ENDPOINT"),
+            forcePathStyle: true,
+            params: {
+              Bucket: env("AWS_BUCKET"),
+            },
+          },
         },
-        region: env("DO_SPACE_REGION"),
-        endpoint: env("DO_SPACE_ENDPOINT"),
-        params: {
-          Bucket: env("DO_SPACE_BUCKET"),
+        actionOptions: {
+          upload: {},
+          uploadStream: {},
+          delete: {},
         },
-      },
-      actionOptions: {
-        upload: {},
-        uploadStream: {},
-        delete: {},
       },
     },
-  },
-});
+  };
+};

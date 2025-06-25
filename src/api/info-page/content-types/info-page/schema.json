@@ -1,0 +1,51 @@
+{
+  "kind": "collectionType",
+  "collectionName": "info_pages",
+  "info": {
+    "singularName": "info-page",
+    "pluralName": "info-pages",
+    "displayName": "Информационная страница",
+    "description": "Информационные страницы, такие как доставка, политика конфиденциальности и т.д."
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "subTitle": {
+      "type": "richtext",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "content": {
+      "type": "richtext",
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    }
+  }
+}

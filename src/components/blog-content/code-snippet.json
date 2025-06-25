@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_blog_content_code_snippets",
+  "info": {
+    "displayName": "Code Snippet",
+    "icon": "code",
+    "description": "A block for displaying code snippets."
+  },
+  "options": {},
+  "attributes": {
+    "code": {
+      "type": "text",
+      "required": true
+    },
+    "language": {
+      "type": "string",
+      "description": "e.g., javascript, python, html"
+    }
+  }
+}

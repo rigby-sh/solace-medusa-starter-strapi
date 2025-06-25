@@ -1,4 +1,4 @@
-export default [
+export default ({ env }) => [
   "strapi::errors",
   {
     name: "strapi::security",
@@ -13,14 +13,14 @@ export default [
             "data:",
             "cdn.jsdelivr.net",
             "strapi.io",
-            process.env.SPACE_URL,
+            env('AWS_ENDPOINT'),
           ],
           "media-src": [
             "'self'",
             "data:",
             "blob:",
             "strapi.io",
-            process.env.SPACE_URL,
+            env('AWS_ENDPOINT'),
           ],
           upgradeInsecureRequests: null,
         },

@@ -1,0 +1,153 @@
+{
+  "kind": "singleType",
+  "collectionName": "service_pages",
+  "info": {
+    "singularName": "service-page",
+    "pluralName": "service-pages",
+    "displayName": "Страница 'Сервисное обслуживание'",
+    "description": "Страница с информацией о сервисном обслуживании"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": "Забота о клиентах",
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "subTitle": {
+      "type": "text",
+      "default": "Уважаемый покупатель, благодарим вас за выбор бытовой техники BERTAZZONI.",
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "request_block_title": {
+      "type": "string",
+      "default": "Заявка на сервисное обслуживание",
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "request_block_description": {
+      "type": "string",
+      "default": "Вы можете направить сообщение или оставить заявку:",
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "request_block_phone": {
+      "type": "string",
+      "default": "+7 (499) 719-19-89",
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "request_block_button_text": {
+      "type": "string",
+      "default": "Оставить заявку",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "request_block_email_text": {
+      "type": "string",
+      "default": "Написать: service@koros-kitchen.com",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "installation_block_title": {
+      "type": "string",
+      "default": "По вопросам установки и подключения бытовой техники:",
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "installation_block_comment": {
+      "type": "string",
+      "default": "(кроме газовых приборов)",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "installation_block_name": {
+      "type": "string",
+      "default": "СЦ БытМонтаж",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "installation_block_phone": {
+      "type": "string",
+      "default": "+7-985-854-14-46",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "installation_block_website": {
+      "type": "string",
+      "default": "www.bytmg.ru",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "installation_block_note": {
+      "type": "string",
+      "default": "Обращаем Ваше внимание, что подключение и установка производится к готовым коммуникациям",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "centers_list_title": {
+      "type": "string",
+      "default": "Центры сервисного обслуживания",
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    }
+  }
+}

@@ -10,6 +10,8 @@ export default ({ env }) => ({
       salt: env('TRANSFER_TOKEN_SALT'),
     },
   },
+  // Добавляем настройки локализации
+  locales: ['ru', 'en'], // Добавляем русский язык, 'en' оставляем как язык по умолчанию
   flags: {
     nps: env.bool('FLAG_NPS', true),
     promoteEE: env.bool('FLAG_PROMOTE_EE', true),

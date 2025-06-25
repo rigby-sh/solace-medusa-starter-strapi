@@ -1,11 +1,11 @@
 {
   "kind": "collectionType",
-  "collectionName": "blog_post_categories",
+  "collectionName": "tags",
   "info": {
-    "singularName": "blog-post-category",
-    "pluralName": "blog-post-categories",
-    "displayName": "Категория блога",
-    "description": ""
+    "singularName": "tag",
+    "pluralName": "tags",
+    "displayName": "Тег",
+    "description": "Теги для статей блога"
   },
   "options": {
     "draftAndPublish": true
@@ -16,8 +16,10 @@
     }
   },
   "attributes": {
-    "Title": {
+    "Name": {
       "type": "string",
+      "required": true,
+      "unique": true,
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -26,13 +28,14 @@
     },
     "Slug": {
       "type": "uid",
-      "targetField": "Title"
+      "targetField": "Name",
+      "required": true
     },
     "blogs": {
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::blog.blog",
-      "mappedBy": "categories"
+      "mappedBy": "tags"
     }
   }
 }

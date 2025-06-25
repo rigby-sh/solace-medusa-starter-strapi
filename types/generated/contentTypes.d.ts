@@ -485,62 +485,65 @@ export interface PluginUsersPermissionsUser
   };
 }
 
-export interface ApiAboutUsAboutUs extends Struct.SingleTypeSchema {
-  collectionName: 'about_uses';
-  info: {
-    singularName: 'about-us';
-    pluralName: 'about-uses';
-    displayName: 'About Us';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Banner: Schema.Attribute.Media<'images', true> & Schema.Attribute.Required;
-    OurStory: Schema.Attribute.Component<'about-us.content-section', false>;
-    WhyUs: Schema.Attribute.Component<'about-us.why-us', false>;
-    OurCraftsmanship: Schema.Attribute.Component<
-      'about-us.content-section',
-      false
-    >;
-    Numbers: Schema.Attribute.Component<'about-us.numerical-content', true>;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::about-us.about-us'
-    >;
-  };
-}
-
 export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
   collectionName: 'blogs';
   info: {
     singularName: 'blog';
     pluralName: 'blogs';
-    displayName: 'Blog';
+    displayName: '\u0421\u0442\u0430\u0442\u044C\u044F \u0431\u043B\u043E\u0433\u0430';
     description: '';
   };
   options: {
     draftAndPublish: true;
   };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
   attributes: {
-    Title: Schema.Attribute.String & Schema.Attribute.Required;
-    Slug: Schema.Attribute.UID<'Title'>;
-    Content: Schema.Attribute.RichText & Schema.Attribute.Required;
-    FeaturedImage: Schema.Attribute.Media<'images' | 'files'> &
-      Schema.Attribute.Required;
-    Categories: Schema.Attribute.Relation<
-      'oneToMany',
+    Title: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    Description: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    FeaturedImage: Schema.Attribute.Media<'images'>;
+    HeaderImages: Schema.Attribute.Media<'images' | 'videos', true>;
+    Date: Schema.Attribute.Date;
+    DynamicContent: Schema.Attribute.DynamicZone<
+      [
+        'blog-content.text-paragraph',
+        'blog-content.single-image-block',
+        'blog-content.image-gallery-block',
+        'blog-content.quote-block',
+        'blog-content.code-snippet',
+        'blog-content.video-embed-block',
+        'blog-content.heading-block',
+      ]
+    > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    slug: Schema.Attribute.UID<'Title'> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    categories: Schema.Attribute.Relation<
+      'manyToMany',
       'api::blog-post-category.blog-post-category'
     >;
+    tags: Schema.Attribute.Relation<'manyToMany', 'api::tag.tag'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -559,15 +562,26 @@ export interface ApiBlogPostCategoryBlogPostCategory
   info: {
     singularName: 'blog-post-category';
     pluralName: 'blog-post-categories';
-    displayName: 'BlogPostCategories';
+    displayName: '\u041A\u0430\u0442\u0435\u0433\u043E\u0440\u0438\u044F \u0431\u043B\u043E\u0433\u0430';
     description: '';
   };
   options: {
     draftAndPublish: true;
   };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
   attributes: {
-    Title: Schema.Attribute.String;
+    Title: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     Slug: Schema.Attribute.UID<'Title'>;
+    blogs: Schema.Attribute.Relation<'manyToMany', 'api::blog.blog'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -583,24 +597,44 @@ export interface ApiBlogPostCategoryBlogPostCategory
   };
 }
 
-export interface ApiCollectionCollection extends Struct.CollectionTypeSchema {
-  collectionName: 'collections';
+export interface ApiInfoPageInfoPage extends Struct.CollectionTypeSchema {
+  collectionName: 'info_pages';
   info: {
-    singularName: 'collection';
-    pluralName: 'collections';
-    displayName: 'Collections';
-    description: '';
+    singularName: 'info-page';
+    pluralName: 'info-pages';
+    displayName: '\u0418\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u043E\u043D\u043D\u0430\u044F \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0430';
+    description: '\u0418\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u043E\u043D\u043D\u044B\u0435 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u044B, \u0442\u0430\u043A\u0438\u0435 \u043A\u0430\u043A \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0430, \u043F\u043E\u043B\u0438\u0442\u0438\u043A\u0430 \u043A\u043E\u043D\u0444\u0438\u0434\u0435\u043D\u0446\u0438\u0430\u043B\u044C\u043D\u043E\u0441\u0442\u0438 \u0438 \u0442.\u0434.';
   };
   options: {
     draftAndPublish: true;
   };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
   attributes: {
-    Title: Schema.Attribute.String & Schema.Attribute.Required;
-    Handle: Schema.Attribute.String &
+    title: Schema.Attribute.String &
       Schema.Attribute.Required &
-      Schema.Attribute.Unique;
-    Image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
-    Description: Schema.Attribute.Text & Schema.Attribute.Required;
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    subTitle: Schema.Attribute.RichText &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    content: Schema.Attribute.RichText &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -611,139 +645,67 @@ export interface ApiCollectionCollection extends Struct.CollectionTypeSchema {
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::collection.collection'
+      'api::info-page.info-page'
     >;
   };
 }
 
-export interface ApiFaqFaq extends Struct.SingleTypeSchema {
-  collectionName: 'faqs';
-  info: {
-    singularName: 'faq';
-    pluralName: 'faqs';
-    displayName: 'FAQ';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    FAQSection: Schema.Attribute.Component<'faq.faq', true>;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::faq.faq'>;
-  };
-}
-
-export interface ApiHomepageHomepage extends Struct.SingleTypeSchema {
-  collectionName: 'homepages';
-  info: {
-    singularName: 'homepage';
-    pluralName: 'homepages';
-    displayName: 'Homepage';
-    description: '';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    HeroBanner: Schema.Attribute.Component<'homepage.hero-banner', false>;
-    MidBanner: Schema.Attribute.Component<'homepage.hero-banner', false>;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::homepage.homepage'
-    >;
-  };
-}
-
-export interface ApiPrivacyPolicyPrivacyPolicy extends Struct.SingleTypeSchema {
-  collectionName: 'privacy_policies';
-  info: {
-    singularName: 'privacy-policy';
-    pluralName: 'privacy-policies';
-    displayName: 'Privacy Policy';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    PageContent: Schema.Attribute.RichText;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::privacy-policy.privacy-policy'
-    >;
-  };
-}
-
-export interface ApiProductVariantColorProductVariantColor
+export interface ApiServiceCenterServiceCenter
   extends Struct.CollectionTypeSchema {
-  collectionName: 'product_variants_colors';
+  collectionName: 'service_centers';
   info: {
-    singularName: 'product-variant-color';
-    pluralName: 'product-variants-colors';
-    displayName: 'ProductVariantsColors';
-    description: '';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    Name: Schema.Attribute.String & Schema.Attribute.Required;
-    Type: Schema.Attribute.DynamicZone<
-      ['color-image.color-image', 'color-hex.color-hex']
-    >;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::product-variant-color.product-variant-color'
-    >;
-  };
-}
-
-export interface ApiTermsAndConditionTermsAndCondition
-  extends Struct.SingleTypeSchema {
-  collectionName: 'terms_and_conditions';
-  info: {
-    singularName: 'terms-and-condition';
-    pluralName: 'terms-and-conditions';
-    displayName: 'Terms & Conditions';
-    description: '';
+    singularName: 'service-center';
+    pluralName: 'service-centers';
+    displayName: '\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0439 \u0446\u0435\u043D\u0442\u0440';
+    description: '\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u044B\u0435 \u0446\u0435\u043D\u0442\u0440\u044B \u043F\u043E \u0433\u043E\u0440\u043E\u0434\u0430\u043C';
   };
   options: {
     draftAndPublish: true;
   };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
   attributes: {
-    PageContent: Schema.Attribute.RichText;
+    city: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    address: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    phone: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    website: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    comment: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -754,8 +716,184 @@ export interface ApiTermsAndConditionTermsAndCondition
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::terms-and-condition.terms-and-condition'
+      'api::service-center.service-center'
     >;
+  };
+}
+
+export interface ApiServicePageServicePage extends Struct.SingleTypeSchema {
+  collectionName: 'service_pages';
+  info: {
+    singularName: 'service-page';
+    pluralName: 'service-pages';
+    displayName: "\u0421\u0442\u0440\u0430\u043D\u0438\u0446\u0430 '\u0421\u0435\u0440\u0432\u0438\u0441\u043D\u043E\u0435 \u043E\u0431\u0441\u043B\u0443\u0436\u0438\u0432\u0430\u043D\u0438\u0435'";
+    description: '\u0421\u0442\u0440\u0430\u043D\u0438\u0446\u0430 \u0441 \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u0435\u0439 \u043E \u0441\u0435\u0440\u0432\u0438\u0441\u043D\u043E\u043C \u043E\u0431\u0441\u043B\u0443\u0436\u0438\u0432\u0430\u043D\u0438\u0438';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }> &
+      Schema.Attribute.DefaultTo<'\u0417\u0430\u0431\u043E\u0442\u0430 \u043E \u043A\u043B\u0438\u0435\u043D\u0442\u0430\u0445'>;
+    subTitle: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }> &
+      Schema.Attribute.DefaultTo<'\u0423\u0432\u0430\u0436\u0430\u0435\u043C\u044B\u0439 \u043F\u043E\u043A\u0443\u043F\u0430\u0442\u0435\u043B\u044C, \u0431\u043B\u0430\u0433\u043E\u0434\u0430\u0440\u0438\u043C \u0432\u0430\u0441 \u0437\u0430 \u0432\u044B\u0431\u043E\u0440 \u0431\u044B\u0442\u043E\u0432\u043E\u0439 \u0442\u0435\u0445\u043D\u0438\u043A\u0438 BERTAZZONI.'>;
+    request_block_title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }> &
+      Schema.Attribute.DefaultTo<'\u0417\u0430\u044F\u0432\u043A\u0430 \u043D\u0430 \u0441\u0435\u0440\u0432\u0438\u0441\u043D\u043E\u0435 \u043E\u0431\u0441\u043B\u0443\u0436\u0438\u0432\u0430\u043D\u0438\u0435'>;
+    request_block_description: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }> &
+      Schema.Attribute.DefaultTo<'\u0412\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u043D\u0430\u043F\u0440\u0430\u0432\u0438\u0442\u044C \u0441\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u0435 \u0438\u043B\u0438 \u043E\u0441\u0442\u0430\u0432\u0438\u0442\u044C \u0437\u0430\u044F\u0432\u043A\u0443:'>;
+    request_block_phone: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }> &
+      Schema.Attribute.DefaultTo<'+7 (499) 719-19-89'>;
+    request_block_button_text: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }> &
+      Schema.Attribute.DefaultTo<'\u041E\u0441\u0442\u0430\u0432\u0438\u0442\u044C \u0437\u0430\u044F\u0432\u043A\u0443'>;
+    request_block_email_text: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }> &
+      Schema.Attribute.DefaultTo<'\u041D\u0430\u043F\u0438\u0441\u0430\u0442\u044C: service@koros-kitchen.com'>;
+    installation_block_title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }> &
+      Schema.Attribute.DefaultTo<'\u041F\u043E \u0432\u043E\u043F\u0440\u043E\u0441\u0430\u043C \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0438 \u0438 \u043F\u043E\u0434\u043A\u043B\u044E\u0447\u0435\u043D\u0438\u044F \u0431\u044B\u0442\u043E\u0432\u043E\u0439 \u0442\u0435\u0445\u043D\u0438\u043A\u0438:'>;
+    installation_block_comment: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }> &
+      Schema.Attribute.DefaultTo<'(\u043A\u0440\u043E\u043C\u0435 \u0433\u0430\u0437\u043E\u0432\u044B\u0445 \u043F\u0440\u0438\u0431\u043E\u0440\u043E\u0432)'>;
+    installation_block_name: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }> &
+      Schema.Attribute.DefaultTo<'\u0421\u0426 \u0411\u044B\u0442\u041C\u043E\u043D\u0442\u0430\u0436'>;
+    installation_block_phone: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }> &
+      Schema.Attribute.DefaultTo<'+7-985-854-14-46'>;
+    installation_block_website: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }> &
+      Schema.Attribute.DefaultTo<'www.bytmg.ru'>;
+    installation_block_note: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }> &
+      Schema.Attribute.DefaultTo<'\u041E\u0431\u0440\u0430\u0449\u0430\u0435\u043C \u0412\u0430\u0448\u0435 \u0432\u043D\u0438\u043C\u0430\u043D\u0438\u0435, \u0447\u0442\u043E \u043F\u043E\u0434\u043A\u043B\u044E\u0447\u0435\u043D\u0438\u0435 \u0438 \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0430 \u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u0442\u0441\u044F \u043A \u0433\u043E\u0442\u043E\u0432\u044B\u043C \u043A\u043E\u043C\u043C\u0443\u043D\u0438\u043A\u0430\u0446\u0438\u044F\u043C'>;
+    centers_list_title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }> &
+      Schema.Attribute.DefaultTo<'\u0426\u0435\u043D\u0442\u0440\u044B \u0441\u0435\u0440\u0432\u0438\u0441\u043D\u043E\u0433\u043E \u043E\u0431\u0441\u043B\u0443\u0436\u0438\u0432\u0430\u043D\u0438\u044F'>;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::service-page.service-page'
+    >;
+  };
+}
+
+export interface ApiTagTag extends Struct.CollectionTypeSchema {
+  collectionName: 'tags';
+  info: {
+    singularName: 'tag';
+    pluralName: 'tags';
+    displayName: '\u0422\u0435\u0433';
+    description: '\u0422\u0435\u0433\u0438 \u0434\u043B\u044F \u0441\u0442\u0430\u0442\u0435\u0439 \u0431\u043B\u043E\u0433\u0430';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    Name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    Slug: Schema.Attribute.UID<'Name'> & Schema.Attribute.Required;
+    blogs: Schema.Attribute.Relation<'manyToMany', 'api::blog.blog'>;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::tag.tag'>;
   };
 }
 
@@ -1134,15 +1272,12 @@ declare module '@strapi/strapi' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
-      'api::about-us.about-us': ApiAboutUsAboutUs;
       'api::blog.blog': ApiBlogBlog;
       'api::blog-post-category.blog-post-category': ApiBlogPostCategoryBlogPostCategory;
-      'api::collection.collection': ApiCollectionCollection;
-      'api::faq.faq': ApiFaqFaq;
-      'api::homepage.homepage': ApiHomepageHomepage;
-      'api::privacy-policy.privacy-policy': ApiPrivacyPolicyPrivacyPolicy;
-      'api::product-variant-color.product-variant-color': ApiProductVariantColorProductVariantColor;
-      'api::terms-and-condition.terms-and-condition': ApiTermsAndConditionTermsAndCondition;
+      'api::info-page.info-page': ApiInfoPageInfoPage;
+      'api::service-center.service-center': ApiServiceCenterServiceCenter;
+      'api::service-page.service-page': ApiServicePageServicePage;
+      'api::tag.tag': ApiTagTag;
       'admin::permission': AdminPermission;
       'admin::user': AdminUser;
       'admin::role': AdminRole;

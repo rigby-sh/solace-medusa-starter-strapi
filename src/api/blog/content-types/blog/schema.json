@@ -4,39 +4,91 @@
   "info": {
     "singularName": "blog",
     "pluralName": "blogs",
-    "displayName": "Blog",
+    "displayName": "Статья блога",
     "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
-  "pluginOptions": {},
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
   "attributes": {
     "Title": {
       "type": "string",
-      "required": true
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
-    "Slug": {
-      "type": "uid",
-      "targetField": "Title"
-    },
-    "Content": {
-      "type": "richtext",
-      "required": true
+    "Description": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "FeaturedImage": {
       "type": "media",
       "multiple": false,
-      "required": true,
+      "required": false,
       "allowedTypes": [
-        "images",
-        "files"
+        "images"
       ]
     },
-    "Categories": {
+    "HeaderImages": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "videos"
+      ]
+    },
+    "Date": {
+      "type": "date"
+    },
+    "DynamicContent": {
+      "type": "dynamiczone",
+      "components": [
+        "blog-content.text-paragraph",
+        "blog-content.single-image-block",
+        "blog-content.image-gallery-block",
+        "blog-content.quote-block",
+        "blog-content.code-snippet",
+        "blog-content.video-embed-block",
+        "blog-content.heading-block"
+      ],
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "Title",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "categories": {
       "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::blog-post-category.blog-post-category"
+      "relation": "manyToMany",
+      "target": "api::blog-post-category.blog-post-category",
+      "inversedBy": "blogs"
+    },
+    "tags": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tag.tag",
+      "inversedBy": "blogs"
     }
   }
 }

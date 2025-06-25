@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_blog_content_video_embed_blocks",
+  "info": {
+    "displayName": "Video Embed Block",
+    "icon": "video",
+    "description": "A block for embedding videos from URLs or with embed code."
+  },
+  "options": {},
+  "attributes": {
+    "Video": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

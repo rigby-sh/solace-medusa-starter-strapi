@@ -1,140 +1,110 @@
 import type { Struct, Schema } from '@strapi/strapi';
 
-export interface HomepageHeroBanner extends Struct.ComponentSchema {
-  collectionName: 'components_homepage_hero_banners';
+export interface BlogContentVideoEmbedBlock extends Struct.ComponentSchema {
+  collectionName: 'components_blog_content_video_embed_blocks';
   info: {
-    displayName: 'HeroBanner';
-    icon: '';
+    displayName: 'Video Embed Block';
+    icon: 'video';
+    description: 'A block for embedding videos from URLs or with embed code.';
   };
   attributes: {
-    Headline: Schema.Attribute.String & Schema.Attribute.Required;
-    Text: Schema.Attribute.Text;
-    CTA: Schema.Attribute.Component<'homepage.cta', false>;
-    Image: Schema.Attribute.Media<'images' | 'files'> &
-      Schema.Attribute.Required;
+    Video: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
   };
 }
 
-export interface HomepageCta extends Struct.ComponentSchema {
-  collectionName: 'components_homepage_ctas';
+export interface BlogContentTextParagraph extends Struct.ComponentSchema {
+  collectionName: 'components_blog_content_text_paragraphs';
   info: {
-    displayName: 'CTA';
+    displayName: 'Text Paragraph';
+    icon: 'align-left';
+    description: 'A simple paragraph of text with rich text capabilities.';
   };
   attributes: {
-    BtnText: Schema.Attribute.String;
-    BtnLink: Schema.Attribute.String;
+    content: Schema.Attribute.RichText & Schema.Attribute.Required;
   };
 }
 
-export interface FaqFaq extends Struct.ComponentSchema {
-  collectionName: 'components_faq_faqs';
+export interface BlogContentSingleImageBlock extends Struct.ComponentSchema {
+  collectionName: 'components_blog_content_single_image_blocks';
   info: {
-    displayName: 'FAQ';
-    description: '';
+    displayName: 'Single Image Block';
+    icon: 'image';
+    description: 'A block for a single image with optional caption and alt text.';
   };
   attributes: {
-    Title: Schema.Attribute.String & Schema.Attribute.Required;
-    Question: Schema.Attribute.Component<'faq.faq-question', true>;
-    Bookmark: Schema.Attribute.String & Schema.Attribute.Required;
+    image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    caption: Schema.Attribute.String;
+    altText: Schema.Attribute.String;
   };
 }
 
-export interface FaqFaqQuestion extends Struct.ComponentSchema {
-  collectionName: 'components_faq_faq_questions';
+export interface BlogContentQuoteBlock extends Struct.ComponentSchema {
+  collectionName: 'components_blog_content_quote_blocks';
   info: {
-    displayName: 'FaqQuestion';
-    description: '';
+    displayName: 'Quote Block';
+    icon: 'quote-left';
+    description: 'A block for displaying a quote.';
   };
   attributes: {
-    Title: Schema.Attribute.String & Schema.Attribute.Required;
-    Text: Schema.Attribute.Text & Schema.Attribute.Required;
+    quoteText: Schema.Attribute.Text & Schema.Attribute.Required;
+    author: Schema.Attribute.String;
   };
 }
 
-export interface ColorImageColorImage extends Struct.ComponentSchema {
-  collectionName: 'components_color_image_color_images';
+export interface BlogContentImageGalleryBlock extends Struct.ComponentSchema {
+  collectionName: 'components_blog_content_image_gallery_blocks';
   info: {
-    displayName: 'ColorImage';
-    icon: 'picture';
+    displayName: 'Image Gallery Block';
+    icon: 'images';
+    description: 'A block for an image gallery.';
   };
   attributes: {
-    Image: Schema.Attribute.Media<'images' | 'files'>;
+    images: Schema.Attribute.Media<'images', true> & Schema.Attribute.Required;
+    galleryTitle: Schema.Attribute.String;
   };
 }
 
-export interface ColorHexColorHex extends Struct.ComponentSchema {
-  collectionName: 'components_color_hex_color_hexes';
+export interface BlogContentHeadingBlock extends Struct.ComponentSchema {
+  collectionName: 'components_blog_content_heading_blocks';
   info: {
-    displayName: 'ColorHex';
-    icon: 'brush';
+    displayName: '\u0411\u043B\u043E\u043A \u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043A\u0430';
+    icon: 'heading';
+    description: '\u041F\u0440\u043E\u0441\u0442\u043E\u0439 \u0442\u0435\u043A\u0441\u0442\u043E\u0432\u044B\u0439 \u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043E\u043A.';
   };
   attributes: {
-    Color: Schema.Attribute.String;
+    heading_text: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
   };
 }
 
-export interface AboutUsWhyUs extends Struct.ComponentSchema {
-  collectionName: 'components_about_us_whyuses';
+export interface BlogContentCodeSnippet extends Struct.ComponentSchema {
+  collectionName: 'components_blog_content_code_snippets';
   info: {
-    displayName: 'FramedTextContentSection';
-    description: '';
+    displayName: 'Code Snippet';
+    icon: 'code';
+    description: 'A block for displaying code snippets.';
   };
   attributes: {
-    Title: Schema.Attribute.String & Schema.Attribute.Required;
-    Tile: Schema.Attribute.Component<'about-us.tile', true>;
-  };
-}
-
-export interface AboutUsTile extends Struct.ComponentSchema {
-  collectionName: 'components_about_us_tiles';
-  info: {
-    displayName: 'Tile';
-  };
-  attributes: {
-    Image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
-    Title: Schema.Attribute.String & Schema.Attribute.Required;
-    Text: Schema.Attribute.Text & Schema.Attribute.Required;
-  };
-}
-
-export interface AboutUsNumericalContent extends Struct.ComponentSchema {
-  collectionName: 'components_about_us_numerical_contents';
-  info: {
-    displayName: 'NumericalContentSection';
-    description: '';
-  };
-  attributes: {
-    Title: Schema.Attribute.String & Schema.Attribute.Required;
-    Text: Schema.Attribute.String & Schema.Attribute.Required;
-  };
-}
-
-export interface AboutUsContentSection extends Struct.ComponentSchema {
-  collectionName: 'components_about_us_content_sections';
-  info: {
-    displayName: 'ImageTextContentSection';
-    description: '';
-  };
-  attributes: {
-    Title: Schema.Attribute.String & Schema.Attribute.Required;
-    Text: Schema.Attribute.Text & Schema.Attribute.Required;
-    Image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    code: Schema.Attribute.Text & Schema.Attribute.Required;
+    language: Schema.Attribute.String;
   };
 }
 
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
-      'homepage.hero-banner': HomepageHeroBanner;
-      'homepage.cta': HomepageCta;
-      'faq.faq': FaqFaq;
-      'faq.faq-question': FaqFaqQuestion;
-      'color-image.color-image': ColorImageColorImage;
-      'color-hex.color-hex': ColorHexColorHex;
-      'about-us.why-us': AboutUsWhyUs;
-      'about-us.tile': AboutUsTile;
-      'about-us.numerical-content': AboutUsNumericalContent;
-      'about-us.content-section': AboutUsContentSection;
+      'blog-content.video-embed-block': BlogContentVideoEmbedBlock;
+      'blog-content.text-paragraph': BlogContentTextParagraph;
+      'blog-content.single-image-block': BlogContentSingleImageBlock;
+      'blog-content.quote-block': BlogContentQuoteBlock;
+      'blog-content.image-gallery-block': BlogContentImageGalleryBlock;
+      'blog-content.heading-block': BlogContentHeadingBlock;
+      'blog-content.code-snippet': BlogContentCodeSnippet;
     }
   }
 }
